@@ -4,6 +4,7 @@ public class PlayerStats : MonoBehaviour
 {
     public delegate void OnHealthChangedDelegate();
     public OnHealthChangedDelegate onHealthChangedCallback;
+    private SpriteRenderer spriteRenderer;
 
     #region Singleton
     private static PlayerStats instance;
@@ -74,12 +75,23 @@ public class PlayerStats : MonoBehaviour
     {
         if (invincible)
         {
+
             invincibleTimer += Time.deltaTime; // 计时器累加
             if (invincibleTimer >= invincibleDuration)
             {
                 invincible = false; // 取消无敌状态
             }
+            else{
+                float remainder = invincibleTimer % 0.2f;
+                spriteRenderer.enabled = remainder > 0.10f;
+            }
         }
     }
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 }
+
+
 
