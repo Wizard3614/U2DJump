@@ -40,11 +40,9 @@ public class Playcontroller : MonoBehaviour
     void Update()
     {
         checkanimation();
-        jumpPressed = Input.GetButtonDown("Jump");//单次跳跃
-         jump();  
-        if(isjump) animationchange("jump");
+        jump();  
     }
-
+    
     private void FixedUpdate() 
     {
         PhysicsCheck();
@@ -100,6 +98,7 @@ public class Playcontroller : MonoBehaviour
 
     void jump()
     {
+        jumpPressed = Input.GetButtonDown("Jump");//单次跳跃
         if(jumpPressed&&isOnGround)
         {
             
@@ -108,57 +107,56 @@ public class Playcontroller : MonoBehaviour
             rg.AddForce(new Vector2(0f,jumpForce),ForceMode2D.Impulse);
         }
 
-        
+        else if (isOnGround)
+        {
+            isjump = false;
+        }
+        animator.SetBool("isJump",isjump);
     }
 
-    public void animationchange (string animation , float time = 0.2f, float t=0)//选择进行的动画和动画过渡时间
-    {
-        if(t>0)
-        {
-            StartCoroutine(Wait());
-
-        }
-
-        else  Validate();
-
-        IEnumerator Wait()
-        {
-            yield return  new WaitForSeconds(t-time);
-            Validate();
-        }
-
-        void Validate()
-        {
-            if(currrntanimation != animation)
-        {
-            currrntanimation = animation;
-            if(currrntanimation =="")
-            checkanimation();
-            else 
-            animator.CrossFade(animation,time);//动画过度，两个变量为目标动画的名字和过渡时间；
-        }
-        }
-        
-        
-    }
+    // public void animationchange (string animation , float time = 0.2f, float t=0)//选择进行的动画和动画过渡时间
+    // {
+    //     if(t>0)
+    //     {
+    //         StartCoroutine(Wait());
+    //
+    //     }
+    //
+    //     else  Validate();
+    //
+    //     IEnumerator Wait()
+    //     {
+    //         yield return  new WaitForSeconds(t-time);
+    //         Validate();
+    //     }
+    //
+    //     void Validate()
+    //     {
+    //         if(currrntanimation != animation)
+    //     {
+    //         currrntanimation = animation;
+    //         if(currrntanimation =="")
+    //         checkanimation();
+    //         else 
+    //         animator.CrossFade(animation,time);//动画过度，两个变量为目标动画的名字和过渡时间；
+    //     }
+    //     }
+    //     
+    //     
+    // }
 
     public void checkanimation()
     {
-        
         if(currrntanimation == "jump"&&!isOnGround)//避免其他动画打断跳跃动画
         return;
 
-        if (xVelocity  < 0)
+        if (xVelocity  < 0 || xVelocity > 0)
         {
-            animationchange("run");
+            animator.SetBool("isRunning",true);
         }
-
-        else if (xVelocity > 0)
+        else
         {
-            animationchange("run");
+            animator.SetBool("isRunning",false);
         }
-
-        else animationchange("idle");
     }
-
 }

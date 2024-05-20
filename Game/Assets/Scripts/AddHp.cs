@@ -7,9 +7,7 @@ public class AddHp : MonoBehaviour
     // Start is called before the first frame update
     public AudioClip music;
     public GameObject effect;
-
-  
-
+    
  
     void Start()
     {
