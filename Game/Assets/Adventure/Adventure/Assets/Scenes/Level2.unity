@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: saw (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6862314946983499916, guid: 3b0e1b109d5364c42871b1877cd68cf2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fa4ad73323720db44b00bf312060adc6, type: 2}
     - target: {fileID: 7423100655574306330, guid: 3b0e1b109d5364c42871b1877cd68cf2, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -11655,6 +11659,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: saw
       objectReference: {fileID: 0}
+    - target: {fileID: 6862314946983499916, guid: 3b0e1b109d5364c42871b1877cd68cf2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fa4ad73323720db44b00bf312060adc6, type: 2}
     - target: {fileID: 7423100655574306330, guid: 3b0e1b109d5364c42871b1877cd68cf2, type: 3}
       propertyPath: m_SortingOrder
       value: 2
