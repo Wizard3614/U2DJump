@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Trophy : MonoBehaviour
 {
     public string[] Levels;
-    public static int currentLevelIndex = 0;
+    public  int currentLevelIndex = 0;
 
     private void Start()
     {
