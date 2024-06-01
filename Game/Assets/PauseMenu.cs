@@ -10,12 +10,16 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     public static bool pause = false;
     public GameObject UImenu;
-
+    
+    public float fadeDuration = 0.8f; // 淡出效果持续时间
+    public Image fadeImage;
     void Start()
     {
-     
+        fadeImage.color = new Color(0, 0, 0, 0);
+        fadeImage.raycastTarget = false;
     }
 
+    
     // Update is called once per frame
     void Update()
     {
@@ -49,12 +53,43 @@ public class PauseMenu : MonoBehaviour
 
     public void Mainmenu()
     {
-        Time.timeScale = 1;
-        //场景传输函数
-
-        SceneManager.LoadScene("StartScene");
+        StartCoroutine(FadeOutAndLoadScene());
     }
+    public IEnumerator FadeOutAndLoadScene()
+    {
+        Time.timeScale = 1;
+        // 场景传输函数
+         float rate = 1.0f / fadeDuration;
+         float progress = 0.0f;
+        
+         // 渐出当前场景
+         while (progress < 1.0f)
+         {
+             fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, progress));
+             progress += rate * Time.deltaTime;
+             yield return null;
+         }
+         fadeImage.color = new Color(0, 0, 0, 1);
+        
+        // 加载新场景
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartScene");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
 
+        // // 渐入新场景
+        // progress = 0.0f;
+        // while (progress < 1.0f)
+        // {
+        //     fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
+        //     progress += rate * Time.deltaTime;
+        //     yield return null;
+        // }
+        // fadeImage.color = new Color(0, 0, 0, 0);
+        // SceneManager.LoadScene("StartScene");
+    }
+   
     public void Quit()
     {
         Application.Quit();

@@ -57,14 +57,14 @@ public class StartSceneButton : MonoBehaviour
         }
 
         // 渐入新场景
-        progress = 0.0f;
-        while (progress < 1.0f)
-        {
-            fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
-            progress += rate * Time.deltaTime;
-            yield return null;
-        }
-        fadeImage.color = new Color(0, 0, 0, 0);
+        // progress = 0.0f;
+        // while (progress < 1.0f)
+        // {
+        //     fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
+        //     progress += rate * Time.deltaTime;
+        //     yield return null;
+        // }
+        // fadeImage.color = new Color(0, 0, 0, 0);
     }
     private IEnumerator FadeOutAndLoadScene2()
     {
@@ -88,13 +88,13 @@ public class StartSceneButton : MonoBehaviour
         }
 
         // 渐入新场景
-        progress = 0.0f;
-        while (progress < 1.0f)
-        {
-            fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
-            progress += rate * Time.deltaTime;
-            yield return null;
-        }
-        fadeImage.color = new Color(0, 0, 0, 0);
+        // progress = 0.0f;
+        // while (progress < 1.0f)
+        // {
+        //     fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
+        //     progress += rate * Time.deltaTime;
+        //     yield return null;
+        // }
+        // fadeImage.color = new Color(0, 0, 0, 0);
     }
 }
