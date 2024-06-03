@@ -11583,6 +11583,18 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8745634296749058710, guid: 53c1ef6a256b5874e89d2ffc9b179116, type: 3}
+      propertyPath: Levels.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745634296749058710, guid: 53c1ef6a256b5874e89d2ffc9b179116, type: 3}
+      propertyPath: Levels.Array.data[2]
+      value: Level3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745634296749058710, guid: 53c1ef6a256b5874e89d2ffc9b179116, type: 3}
+      propertyPath: Levels.Array.data[3]
+      value: Level4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
