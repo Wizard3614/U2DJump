@@ -9342,6 +9342,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1700211733762057944, guid: 189b61d909239d64e970f436e6a2a998, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5399328594086844796, guid: 189b61d909239d64e970f436e6a2a998, type: 3}
       propertyPath: m_Layer
       value: 5
@@ -9516,7 +9520,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1515449946
 Transform:

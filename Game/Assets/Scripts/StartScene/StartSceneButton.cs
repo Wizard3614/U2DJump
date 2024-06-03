@@ -28,6 +28,16 @@ public class StartSceneButton : MonoBehaviour
         PlayClickSound();
         StartCoroutine(FadeOutAndLoadScene2());
     }
+    public void OnButtonClick3()
+    {
+        PlayClickSound();
+        StartCoroutine(FadeOutAndLoadScene3());
+    }
+    public void OnButtonClick4()
+    {
+        PlayClickSound();
+        StartCoroutine(FadeOutAndLoadScene4());
+    }
     public void PlayClickSound()
     {
         if (clickSound != null)
@@ -55,16 +65,6 @@ public class StartSceneButton : MonoBehaviour
         {
             yield return null;
         }
-
-        // 渐入新场景
-        // progress = 0.0f;
-        // while (progress < 1.0f)
-        // {
-        //     fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
-        //     progress += rate * Time.deltaTime;
-        //     yield return null;
-        // }
-        // fadeImage.color = new Color(0, 0, 0, 0);
     }
     private IEnumerator FadeOutAndLoadScene2()
     {
@@ -86,15 +86,48 @@ public class StartSceneButton : MonoBehaviour
         {
             yield return null;
         }
+    }
+    private IEnumerator FadeOutAndLoadScene3()
+    {
+        float rate = 1.0f / fadeDuration;
+        float progress = 0.0f;
 
-        // 渐入新场景
-        // progress = 0.0f;
-        // while (progress < 1.0f)
-        // {
-        //     fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, progress));
-        //     progress += rate * Time.deltaTime;
-        //     yield return null;
-        // }
-        // fadeImage.color = new Color(0, 0, 0, 0);
+        // 渐出当前场景
+        while (progress < 1.0f)
+        {
+            fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, progress));
+            progress += rate * Time.deltaTime;
+            yield return null;
+        }
+        fadeImage.color = new Color(0, 0, 0, 1);
+
+        // 加载新场景
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level3");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+    private IEnumerator FadeOutAndLoadScene4()
+    {
+        float rate = 1.0f / fadeDuration;
+        float progress = 0.0f;
+
+        // 渐出当前场景
+        while (progress < 1.0f)
+        {
+            fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(0, 1, progress));
+            progress += rate * Time.deltaTime;
+            yield return null;
+        }
+        fadeImage.color = new Color(0, 0, 0, 1);
+
+        // 加载新场景
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level3");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }
+
