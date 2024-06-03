@@ -4,7 +4,7 @@ using System.Collections;
 
 public class LevelSceneManager : MonoBehaviour
 {
-    public CanvasGroup canvasGroup; // 用于淡入效果的Canvas Group
+    // public CanvasGroup canvasGroup; // 用于淡入效果的Canvas Group
     public float fadeDuration = 0.8f; // 淡入效果持续时间
     public Image fadeImage;
     void Start()
