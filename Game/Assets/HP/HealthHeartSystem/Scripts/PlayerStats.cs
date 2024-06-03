@@ -114,7 +114,7 @@ public class PlayerStats : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         // 销毁角色对象
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
     
 }

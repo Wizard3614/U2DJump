@@ -81,11 +81,12 @@ public class StartSceneButton : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, 1);
 
         // 加载新场景
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level2");
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
+        // AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level2");
+        SceneManager.LoadScene("Level2");
+        // while (!asyncLoad.isDone)
+        // {
+        //     yield return null;
+        // }
     }
     private IEnumerator FadeOutAndLoadScene3()
     {
@@ -123,7 +124,7 @@ public class StartSceneButton : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, 1);
 
         // 加载新场景
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level3");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level4");
         while (!asyncLoad.isDone)
         {
             yield return null;
