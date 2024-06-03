@@ -21,7 +21,9 @@ public float moveSpeed = 2f; // 移动速度
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+
+        
+    void FixedUpdate()
     {
         // 移动障碍物
         rb.position = Vector3.MoveTowards(transform.position, tar, moveSpeed * Time.deltaTime);
