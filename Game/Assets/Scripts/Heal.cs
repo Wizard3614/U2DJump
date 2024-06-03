@@ -26,6 +26,7 @@ public class Heal : MonoBehaviour
             bool pickUp=manager.PickupItem(gameObject);
             if(pickUp)
             {
+                FollowAbove.Instance.Show();
                 PlayerStats.Instance.Heal(0.5f);
                 RemoveItem();
             }

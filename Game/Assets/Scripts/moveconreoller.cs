@@ -21,10 +21,11 @@ public float moveSpeed = 2f; // 移动速度
         rb = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        float moveDistance = moveSpeed * Time.deltaTime;
         // 移动障碍物
-        rb.position = Vector3.MoveTowards(transform.position, tar, moveSpeed * Time.deltaTime);
+        rb.position = Vector3.MoveTowards(transform.position, tar, moveDistance);
     
         // 到达目标位置后，切换目标位置
         if (Vector3.Distance(transform.position, tar) < 0.1f)
