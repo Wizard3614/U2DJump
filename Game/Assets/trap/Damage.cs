@@ -10,6 +10,7 @@ public class Damage : MonoBehaviour
         Playcontroller playcontroller = other.GetComponent<Playcontroller>();
         if (playcontroller != null)
         {
+            FollowAbove.Instance.Show();
             PlayerStats.Instance.TakeDamage(damageAmount);
         }
     }

@@ -27,6 +27,7 @@ public class AddHp : MonoBehaviour
             bool pickUp=manager.PickupItem(gameObject);
             if(pickUp)
             {
+                FollowAbove.Instance.Show();
                 PlayerStats.Instance.AddHealth();
                 RemoveItem();
             }
