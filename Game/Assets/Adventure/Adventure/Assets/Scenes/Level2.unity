@@ -9210,6 +9210,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6283341029589550928, guid: 189b61d909239d64e970f436e6a2a998, type: 3}
+      propertyPath: fadeImage
+      value: 
+      objectReference: {fileID: 1699986034}
     - target: {fileID: 7690024359391786162, guid: 189b61d909239d64e970f436e6a2a998, type: 3}
       propertyPath: m_LocalPosition.x
       value: -436.12317
@@ -10989,7 +10993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1647828680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11004,6 +11008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 1647828681}
   fadeDuration: 0.8
+  fadeImage: {fileID: 0}
 --- !u!225 &1647828681
 CanvasGroup:
   m_ObjectHideFlags: 0
