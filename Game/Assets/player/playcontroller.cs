@@ -14,10 +14,11 @@ public class Playcontroller : MonoBehaviour
 
     public float jumpForce = 6f;//跳跃方向力
     public float a = -0.65f;
+    public int maxJumpCount = 0; // 最大跳跃次数
+    private int jumpCount; // 当前跳跃次数
 
 
     //状态
-    public bool isjump = false;
     public bool isOnGround;
 
     //环境
@@ -66,12 +67,11 @@ public class Playcontroller : MonoBehaviour
         if(leftCheck||rightCheck)
         {
             isOnGround = true;
-            isjump= false;
+            jumpCount = 0; // 重置跳跃计数器
         }
         else 
         {
             isOnGround = false;
-            isjump=true;
         }
     }
     void  Movement()//角色移动
@@ -99,20 +99,18 @@ public class Playcontroller : MonoBehaviour
 
     void jump()
     {
-        jumpPressed = Input.GetButtonDown("Jump");//单次跳跃
-        if(jumpPressed&&isOnGround)
+        bool jumpPressed = Input.GetButtonDown("Jump");
+        if (jumpPressed && (isOnGround || jumpCount < maxJumpCount))
         {
-            
+            rg.velocity = new Vector2(rg.velocity.x, jumpForce);
+            jumpCount++;
             isOnGround = false;
-            isjump =true;
-            rg.AddForce(new Vector2(0f,jumpForce),ForceMode2D.Impulse);
+            animator.SetBool("isJump", true);
         }
-
         else if (isOnGround)
         {
-            isjump = false;
+            animator.SetBool("isJump", false);
         }
-        animator.SetBool("isJump",isjump);
     }
 
     // public void animationchange (string animation , float time = 0.2f, float t=0)//选择进行的动画和动画过渡时间
@@ -159,6 +157,10 @@ public class Playcontroller : MonoBehaviour
         {
             animator.SetBool("isRunning",false);
         }
+    }
+    public void IncreaseMaxJumpCount(int newMaxJumpCount)
+    {
+        maxJumpCount = newMaxJumpCount;
     }
 
 }
