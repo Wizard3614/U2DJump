@@ -13,6 +13,7 @@ public class Playcontroller : MonoBehaviour
     float xVelocity;//水平移动力
 
     public float jumpForce = 6f;//跳跃方向力
+    public float a = -0.65f;
 
 
     //状态
@@ -159,4 +160,5 @@ public class Playcontroller : MonoBehaviour
             animator.SetBool("isRunning",false);
         }
     }
+
 }
