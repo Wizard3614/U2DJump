@@ -1,0 +1,10 @@
+Thank you for downloading my asset!
+Before adding the sprites to your scene, in the inspector tab 
+make sure that:
+
+Sprite Mode: Single.
+Pixels per unit: 32.
+Filter Mode: Point(No filter).
+Compression: None.
+
+Have fun!
