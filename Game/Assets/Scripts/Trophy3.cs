@@ -7,12 +7,14 @@ using UnityEngine.UI;
 public class Trophy3 : MonoBehaviour
 {
     private int currentLevelIndex3 = 3;
-    private float fadeDuration = 0.5f; // 淡出效果持续时间
+    private float fadeDuration = 3f; // 淡出效果持续时间
     public Image fadeImage;
+    private AudioSource audioSource;
     private void Start()
     {
         Debug.Log("当前关卡：");
         Debug.Log(currentLevelIndex3);
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,6 +29,7 @@ public class Trophy3 : MonoBehaviour
 
     public IEnumerator LoadNextScene()
     {
+        audioSource.Play();
         float rate = 1.0f / fadeDuration;
         float progress = 0.0f;
         // 渐出当前场景

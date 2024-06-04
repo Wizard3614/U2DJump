@@ -7,6 +7,7 @@ public class Playcontroller : MonoBehaviour
     private Rigidbody2D rg;
     private BoxCollider2D coll;
     private Animator animator;//获取animation
+    private AudioSource audioSource;
     private string currrntanimation="";//获取当前进行的动画，以便进行下一个动画是否进行的判断
     public float movespeed = 8f;//移动速度乘积。
 
@@ -36,6 +37,7 @@ public class Playcontroller : MonoBehaviour
         rg=GetComponent<Rigidbody2D>();
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -106,6 +108,7 @@ public class Playcontroller : MonoBehaviour
             jumpCount++;
             isOnGround = false;
             animator.SetBool("isJump", true);
+            audioSource.Play();
         }
         else if (isOnGround)
         {

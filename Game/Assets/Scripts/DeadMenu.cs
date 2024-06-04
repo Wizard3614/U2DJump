@@ -26,9 +26,11 @@ public class DeadMenu : MonoBehaviour
 
     void Update()
     {
+        
         preHealth = playerStats.Health;
         if (preHealth <= 0 )
         {
+            // Debug.Log("死了");
             StartCoroutine(PauseGameAfterDeath());
         }
     }

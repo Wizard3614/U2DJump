@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-public class Trophy2 : MonoBehaviour
+public class Trophy8 : MonoBehaviour
 {
-    private int currentLevelIndex2 = 2;
+    private int currentLevelIndex8 = 8;
     private float fadeDuration = 3f; // 淡出效果持续时间
     public Image fadeImage;
     private AudioSource audioSource;
     private void Start()
     {
         Debug.Log("当前关卡：");
-        Debug.Log(currentLevelIndex2);
+        Debug.Log(currentLevelIndex8);
         audioSource = GetComponent<AudioSource>();
     }
 
@@ -43,7 +43,7 @@ public class Trophy2 : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, 1);
 
         // 加载新场景
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level3");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("StartScene");
         while (!asyncLoad.isDone)
         {
             yield return null;
