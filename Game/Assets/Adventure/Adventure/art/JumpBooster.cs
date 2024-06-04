@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class JumpBooster : MonoBehaviour
 {
-    public int newMaxJumpCount = 3; // 新的最大跳跃次数
+    public int newMaxJumpCount = 1; // 新的最大跳跃次数
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

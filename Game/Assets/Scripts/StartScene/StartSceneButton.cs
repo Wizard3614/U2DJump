@@ -46,7 +46,7 @@ public class StartSceneButton : MonoBehaviour
     public void OnButtonClick8()
     {
         PlayClickSound();
-        StartCoroutine(FadeOutAndLoadScene8());
+        StartCoroutine(FadeOutAndLoadScene6());
     }
     public void PlayClickSound()
     {
@@ -161,7 +161,7 @@ public class StartSceneButton : MonoBehaviour
             yield return null;
         }
     }
-    private IEnumerator FadeOutAndLoadScene8()
+    private IEnumerator FadeOutAndLoadScene6()
     {
         float rate = 1.0f / fadeDuration;
         float progress = 0.0f;
@@ -176,7 +176,7 @@ public class StartSceneButton : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, 1);
 
         // 加载新场景
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level8");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level6");
         while (!asyncLoad.isDone)
         {
             yield return null;
