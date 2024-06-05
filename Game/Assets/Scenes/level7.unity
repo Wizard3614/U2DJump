@@ -77713,7 +77713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8205739903006857335, guid: 66d49fcd4f3f570408aaf040d6219c2d, type: 3}
       propertyPath: maxJumpCount
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
