@@ -43,7 +43,7 @@ public class Trophy5 : MonoBehaviour
         fadeImage.color = new Color(0, 0, 0, 1);
 
         // 加载新场景
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level8");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Level6");
         while (!asyncLoad.isDone)
         {
             yield return null;
