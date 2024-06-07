@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Playcontroller : MonoBehaviour
 {
@@ -32,6 +33,19 @@ public class Playcontroller : MonoBehaviour
 
     // 按键
     bool jumpPressed;
+    bool dashPressed;
+    bool slidePressed;
+
+    // 冲刺参数
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    private float dashTime;
+
+    // 滑行参数
+    public float slideSpeed = 12f;
+    public float slideDuration = 0.5f;
+    private bool isSliding = false;
+    private float slideTime;
 
     // 用于保持角色前进的额外速度变量
     private float extraVelocity = 0f;
@@ -42,6 +56,11 @@ public class Playcontroller : MonoBehaviour
     // 反向移动持续时间
     public float reverseDuration = 0.4f;
 
+    // 保存位置
+    private Vector2 savedPosition;
+    private GameObject savedObject;
+    public GameObject markerPrefab; // 用于保存标记的预制体
+
     // Start is called before the first frame update
     void Start()
     {
@@ -49,19 +68,58 @@ public class Playcontroller : MonoBehaviour
         coll = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
+
+        // 订阅场景加载事件
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        // 取消订阅场景加载事件
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    // 在新场景加载时调用此方法
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (savedObject != null)
+        {
+            Destroy(savedObject);
+            savedObject = null;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         checkanimation();
-        jump();  
+        jump();
+
+        // 检测冲刺按键
+        if (Input.GetMouseButtonDown(1) && dashTime <= 0) // 检测鼠标右键
+        {
+            dashPressed = true;
+        }
+
+        // 检测滑行按键
+        if (Input.GetKeyDown(KeyCode.R) && isOnGround && !isSliding)
+        {
+            isSliding = true;
+            slideTime = slideDuration;
+            animator.SetBool("isSliding", true); // 设置滑行动画
+        }
+
+        // 检测保存位置按键
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SaveOrTeleportPosition();
+        }
     }
-    
-    private void FixedUpdate() 
+
+    private void FixedUpdate()
     {
         PhysicsCheck();
-        Movement(); 
+        Movement();
     }
 
     void PhysicsCheck()
@@ -81,7 +139,7 @@ public class Playcontroller : MonoBehaviour
             isOnGround = true;
             jumpCount = 0;
         }
-        else 
+        else
         {
             isOnGround = false;
         }
@@ -91,26 +149,35 @@ public class Playcontroller : MonoBehaviour
     {
         xVelocity = Input.GetAxis("Horizontal");
 
-        // 禁用在空中碰撞墙面时的移动
-        /*if (isTouchingWall && !isOnGround)
+        if (dashPressed && dashTime <= 0)
         {
-            // 保持原先方向的额外速度
-            extraVelocity = xVelocity * 0.5f;
-            xVelocity = 0;
+            dashTime = dashDuration;
+            dashPressed = false;
+        }
 
-            // 记录开始反向移动的时间
-            reverseStartTime = Time.time;
+        if (dashTime > 0)
+        {
+            float dashDirection = transform.localScale.x > 0 ? 1 : -1;
+            rg.velocity = new Vector2(dashDirection * dashSpeed, rg.velocity.y);
+            dashTime -= Time.fixedDeltaTime;
+        }
+        else if (isSliding)
+        {
+            float slideDirection = transform.localScale.x > 0 ? 1 : -1;
+            rg.velocity = new Vector2(slideDirection * slideSpeed, rg.velocity.y);
+            slideTime -= Time.fixedDeltaTime;
+
+            if (slideTime <= 0)
+            {
+                isSliding = false;
+                animator.SetBool("isSliding", false); // 结束滑行动画
+            }
         }
         else
         {
-            // 如果开始反向移动后已经超过了反向移动持续时间，重置额外速度
-            if (Time.time - reverseStartTime > reverseDuration)
-            {
-                extraVelocity = 0;
-            }
-        }*/
+            rg.velocity = new Vector2((xVelocity * movespeed) + extraVelocity, rg.velocity.y);
+        }
 
-        rg.velocity = new Vector2((xVelocity * movespeed) + extraVelocity, rg.velocity.y);
         changeDirction();
     }
 
@@ -180,5 +247,27 @@ public class Playcontroller : MonoBehaviour
     {
         maxJumpCount = newMaxJumpCount;
     }
-}
 
+    // 保存或传送位置
+    void SaveOrTeleportPosition()
+    {
+        if (savedObject == null)
+        {
+            savedPosition = transform.position;
+            savedObject = Instantiate(markerPrefab, savedPosition, Quaternion.identity);
+        }
+        else
+        {
+            StartCoroutine(TeleportAndRemoveMarker());
+        }
+    }
+
+    IEnumerator TeleportAndRemoveMarker()
+    {
+        // 等待一小段时间，确保标记物体不会立即消失
+        yield return new WaitForSeconds(0.1f);
+        transform.position = savedPosition;
+        Destroy(savedObject);
+        savedObject = null;
+    }
+}
